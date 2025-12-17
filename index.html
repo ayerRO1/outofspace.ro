@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="ro">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OUTOFSPACE — 2026 Warp Mode</title>
+  <title>OUTOFSPACE — Coming Soon</title>
 
-  <meta name="description" content="OUTOFSPACE — 2026 Warp Mode. Make your brand unforgettable." />
+  <meta name="description" content="OUTOFSPACE — Coming soon. Make your brand unforgettable!" />
   <meta name="theme-color" content="#0B0F1A" />
 
   <style>
@@ -58,11 +58,11 @@
       text-align:center;
     }
 
-    /* App button logo - clean, premium, contained */
+    /* App button logo — bigger, fills, but keeps green padding visible */
     .app{
       width:170px;
       height:170px;
-      margin: 0 auto 14px;
+      margin: 0 auto 12px;
       border-radius:44px;
       border:1px solid var(--stroke);
       background: rgba(0,0,0,.14);
@@ -71,47 +71,68 @@
         inset 0 0 0 1px rgba(255,255,255,.04);
       display:grid;
       place-items:center;
-      padding:18px; /* ensures logo never touches edges */
+      padding:10px;          /* keeps green margin visible */
       overflow:hidden;
     }
     .app img{
       width:100%;
       height:100%;
-      object-fit:contain; /* no cropping */
+      object-fit:contain;    /* no crop */
       display:block;
-      transform: translateY(1px);
     }
 
     .tagline{
-      margin: 0 0 28px;
-      font-size: 18px;
+      margin: 0 0 26px;
+      font-size: 16px;
       line-height: 1.2;
       color: rgba(255,255,255,.74);
       letter-spacing: .01em;
     }
 
+    /* Headline — bold / premium */
     h1{
       margin: 0 0 22px;
-      font-size: clamp(44px, 6vw, 72px);
+      font-size: clamp(44px, 6vw, 78px);
       line-height: 0.98;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.045em;
       font-weight: 900;
     }
-    .accent{ color: var(--accent); }
 
-    .actions{
+    .line{
+      display:block;
+      white-space:nowrap;
+    }
+
+    /* Typewriter green word */
+    .dynamic{
+      color: var(--accent);
+      display:inline-block;
+      position:relative;
+    }
+    .caret{
+      display:inline-block;
+      width: 10px;
+      height: 0.9em;
+      margin-left: 6px;
+      border-right: 3px solid rgba(166,255,77,.95);
+      transform: translateY(2px);
+      animation: blink 0.85s step-end infinite;
+    }
+    @keyframes blink{
+      50%{ border-color: transparent; }
+    }
+
+    .emailRow{
       display:flex;
-      gap:12px;
       justify-content:center;
-      flex-wrap:wrap;
-      margin-top: 6px;
+      margin-top: 8px;
     }
 
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding: 14px 18px;
+      padding: 14px 20px;
       border-radius: 18px;
       border: 1px solid var(--stroke);
       background: var(--glass);
@@ -121,7 +142,7 @@
       font-size: 16px;
       letter-spacing: -0.01em;
       transition: transform .15s ease, background .15s ease, border-color .15s ease;
-      min-width: 240px;
+      min-width: 320px;
     }
     .btn:hover{
       transform: translateY(-1px);
@@ -130,16 +151,17 @@
     }
 
     .meta{
-      margin-top: 34px;
+      margin-top: 32px;
       font-size: 12px;
       color: rgba(255,255,255,.45);
       letter-spacing:.02em;
     }
 
     @media (max-width: 520px){
-      .app{ width:150px; height:150px; border-radius:40px; padding:16px; }
+      .app{ width:150px; height:150px; border-radius:40px; padding:10px; }
       .btn{ min-width: 100%; }
-      .tagline{ font-size:16px; }
+      .tagline{ font-size:15px; }
+      .line{ white-space:normal; }
     }
   </style>
 </head>
@@ -150,20 +172,22 @@
   <main>
     <div class="wrap">
       <div class="app" aria-label="OUTOFSPACE">
-        <!-- add this file in repo next to index.html -->
+        <!-- put outofspace-logo.jpg next to index.html -->
         <img src="outofspace-logo.jpg" alt="OUTOFSPACE logo">
       </div>
 
-      <div class="tagline">make your brand unforgettable</div>
+      <div class="tagline">Make your brand unforgettable!</div>
 
-      <h1>
-        Site-ul a intrat în <span class="accent">warp mode</span><br>
-        pentru 2026.
+      <h1 aria-label="Site currently in warp mode. Coming soon.">
+        <span class="line">Site currently in</span>
+        <span class="line">
+          <span class="dynamic" id="dynamicText"></span><span class="caret" aria-hidden="true"></span>…
+        </span>
+        <span class="line">Coming soon</span>
       </h1>
 
-      <div class="actions">
+      <div class="emailRow">
         <a class="btn" href="mailto:ofspacemedia@gmail.com">ofspacemedia@gmail.com</a>
-        <a class="btn" href="tel:+40736943321">0736 943 321</a>
       </div>
 
       <div class="meta">© 2025 OUTOFSPACE</div>
@@ -171,7 +195,7 @@
   </main>
 
   <script>
-    // subtle animated starfield (premium, minimal)
+    // --- Subtle animated starfield (premium, minimal) ---
     const canvas = document.getElementById("stars");
     const ctx = canvas.getContext("2d");
 
@@ -207,6 +231,52 @@
     window.addEventListener("resize", resize);
     resize();
     draw();
+
+    // --- Typewriter rotation (changes every ~5s) ---
+    const phrases = [
+      "warp mode",
+      "reconstruction",
+      "sonic phase",
+      "re-build mode",
+      "light speed travel"
+    ];
+
+    const el = document.getElementById("dynamicText");
+
+    const TYPE_MS = 65;       // typing speed
+    const ERASE_MS = 35;      // erase speed
+    const HOLD_MS = 5000;     // keep the word visible before change
+
+    let idx = 0;
+    let pos = 0;
+    let isErasing = false;
+
+    function tick(){
+      const word = phrases[idx];
+
+      if(!isErasing){
+        pos++;
+        el.textContent = word.slice(0, pos);
+        if(pos >= word.length){
+          setTimeout(() => { isErasing = true; tick(); }, HOLD_MS);
+          return;
+        }
+        setTimeout(tick, TYPE_MS);
+      } else {
+        pos--;
+        el.textContent = word.slice(0, pos);
+        if(pos <= 0){
+          isErasing = false;
+          idx = (idx + 1) % phrases.length;
+          setTimeout(tick, 220);
+          return;
+        }
+        setTimeout(tick, ERASE_MS);
+      }
+    }
+
+    // start
+    tick();
   </script>
 </body>
 </html>
