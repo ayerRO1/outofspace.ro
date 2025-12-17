@@ -60,26 +60,24 @@
 
     /* App button logo — bigger, fills, but keeps green padding visible */
     .app{
-      width:170px;
-      height:170px;
-      margin: 0 auto 12px;
-      border-radius:44px;
-      border:1px solid var(--stroke);
-      background: rgba(0,0,0,.14);
-      box-shadow:
-        0 30px 90px rgba(0,0,0,.62),
-        inset 0 0 0 1px rgba(255,255,255,.04);
-      display:grid;
-      place-items:center;
-      padding:10px;          /* keeps green margin visible */
-      overflow:hidden;
-    }
-    .app img{
-      width:100%;
-      height:100%;
-      object-fit:contain;    /* no crop */
-      display:block;
-    }
+  width:170px;
+  height:170px;
+  margin: 0 auto 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  background:transparent;
+  border:none;
+  box-shadow:none;
+}
+
+.app img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
 
     .tagline{
       margin: 0 0 26px;
@@ -181,7 +179,7 @@
       <h1 aria-label="Site currently in warp mode. Coming soon.">
         <span class="line">Site currently in</span>
         <span class="line">
-          <span class="dynamic" id="dynamicText"></span><span class="caret" aria-hidden="true"></span>…
+          <span class="dynamic" id="dynamicText"></span><span class="caret" aria-hidden="true"></span><span class="dots">...</span>
         </span>
         <span class="line">Coming soon</span>
       </h1>
