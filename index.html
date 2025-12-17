@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OUTOFSPACE — Warp Mode</title>
+  <title>OUTOFSPACE — 2026 Warp Mode</title>
 
-  <meta name="description" content="OUTOFSPACE intră în warp mode pentru 2026. Make your brand unforgettable." />
+  <meta name="description" content="OUTOFSPACE — 2026 Warp Mode. Make your brand unforgettable." />
   <meta name="theme-color" content="#0B0F1A" />
 
   <style>
@@ -13,33 +13,32 @@
       --bg:#070A12;
       --bg2:#0B0F1A;
       --text:rgba(255,255,255,.92);
-      --muted:rgba(255,255,255,.65);
-      --accent:#A6FF4D;
+      --muted:rgba(255,255,255,.64);
       --stroke:rgba(255,255,255,.12);
-      --radius:22px;
+      --glass:rgba(255,255,255,.04);
+      --accent:#A6FF4D;
+      --radius:28px;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
 
     body{
       margin:0;
       font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       color:var(--text);
       background:
-        radial-gradient(1200px 800px at 20% 10%, #182042 0%, transparent 60%),
-        radial-gradient(900px 700px at 85% 30%, #123524 0%, transparent 55%),
+        radial-gradient(1200px 800px at 18% 12%, #182042 0%, transparent 60%),
+        radial-gradient(900px 700px at 85% 28%, #123524 0%, transparent 55%),
         linear-gradient(180deg,var(--bg),var(--bg2));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
       overflow:hidden;
     }
 
-    canvas{
+    canvas#stars{
       position:fixed;
       inset:0;
+      width:100%;
+      height:100%;
       z-index:0;
       opacity:.9;
     }
@@ -47,156 +46,167 @@
     main{
       position:relative;
       z-index:1;
-      width:100%;
-      max-width:640px;
-      text-align:center;
-    }
-
-    /* LOGO — app button style */
-    .logo{
-      width:140px;
-      height:140px;
-      margin:0 auto 28px;
-      border-radius:36px;
-      border:1px solid var(--stroke);
-      background:rgba(0,0,0,.18);
+      min-height:100%;
       display:flex;
       align-items:center;
       justify-content:center;
-      box-shadow:
-        0 20px 60px rgba(0,0,0,.6),
-        inset 0 0 0 1px rgba(255,255,255,.04);
+      padding:28px 18px;
     }
 
-    .logo img{
-      width:85%;
-      height:auto;
-      display:block;
-    }
-
-    h1{
-      font-size:clamp(26px,4vw,36px);
-      line-height:1.15;
-      letter-spacing:-0.02em;
-      margin:0 0 14px;
-    }
-
-    .accent{color:var(--accent)}
-
-    p{
-      margin:0 auto 22px;
-      max-width:52ch;
-      font-size:16px;
-      line-height:1.55;
-      color:var(--muted);
-    }
-
-    .tagline{
-      margin-bottom:28px;
-      font-size:14px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.75);
-    }
-
-    .actions{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      align-items:center;
-    }
-
-    .action{
-      text-decoration:none;
-      color:var(--text);
-      font-weight:600;
-      padding:12px 18px;
-      border-radius:14px;
-      border:1px solid var(--stroke);
-      background:rgba(255,255,255,.04);
-      transition:.15s ease;
-      min-width:260px;
+    .wrap{
+      width:min(860px, 100%);
       text-align:center;
     }
 
-    .action:hover{
-      background:rgba(255,255,255,.08);
-      transform:translateY(-1px);
+    /* App button logo - clean, premium, contained */
+    .app{
+      width:170px;
+      height:170px;
+      margin: 0 auto 14px;
+      border-radius:44px;
+      border:1px solid var(--stroke);
+      background: rgba(0,0,0,.14);
+      box-shadow:
+        0 30px 90px rgba(0,0,0,.62),
+        inset 0 0 0 1px rgba(255,255,255,.04);
+      display:grid;
+      place-items:center;
+      padding:18px; /* ensures logo never touches edges */
+      overflow:hidden;
+    }
+    .app img{
+      width:100%;
+      height:100%;
+      object-fit:contain; /* no cropping */
+      display:block;
+      transform: translateY(1px);
     }
 
-    footer{
-      margin-top:36px;
-      font-size:12px;
-      color:rgba(255,255,255,.45);
+    .tagline{
+      margin: 0 0 28px;
+      font-size: 18px;
+      line-height: 1.2;
+      color: rgba(255,255,255,.74);
+      letter-spacing: .01em;
+    }
+
+    h1{
+      margin: 0 0 22px;
+      font-size: clamp(44px, 6vw, 72px);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+    }
+    .accent{ color: var(--accent); }
+
+    .actions{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top: 6px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 14px 18px;
+      border-radius: 18px;
+      border: 1px solid var(--stroke);
+      background: var(--glass);
+      color: var(--text);
+      text-decoration:none;
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      min-width: 240px;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.18);
+    }
+
+    .meta{
+      margin-top: 34px;
+      font-size: 12px;
+      color: rgba(255,255,255,.45);
+      letter-spacing:.02em;
+    }
+
+    @media (max-width: 520px){
+      .app{ width:150px; height:150px; border-radius:40px; padding:16px; }
+      .btn{ min-width: 100%; }
+      .tagline{ font-size:16px; }
     }
   </style>
 </head>
 
 <body>
+  <canvas id="stars"></canvas>
 
-<canvas id="stars"></canvas>
+  <main>
+    <div class="wrap">
+      <div class="app" aria-label="OUTOFSPACE">
+        <!-- add this file in repo next to index.html -->
+        <img src="outofspace-logo.jpg" alt="OUTOFSPACE logo">
+      </div>
 
-<main>
-  <div class="logo">
-    <img src="outofspace-logo.jpg" alt="OUTOFSPACE logo">
-  </div>
+      <div class="tagline">make your brand unforgettable</div>
 
-  <h1>
-    Site-ul a intrat în <span class="accent">warp mode</span> pentru 2026.
-  </h1>
+      <h1>
+        Site-ul a intrat în <span class="accent">warp mode</span><br>
+        pentru 2026.
+      </h1>
 
-  <p>
-    Lucrăm la o versiune nouă OUTOFSPACE, dar dacă vrei să
-    <strong>„lansăm” ceva împreună</strong>, dă-ne un semn.
-  </p>
+      <div class="actions">
+        <a class="btn" href="mailto:ofspacemedia@gmail.com">ofspacemedia@gmail.com</a>
+        <a class="btn" href="tel:+40736943321">0736 943 321</a>
+      </div>
 
-  <div class="tagline">
-    make your brand unforgettable
-  </div>
+      <div class="meta">© 2025 OUTOFSPACE</div>
+    </div>
+  </main>
 
-  <div class="actions">
-    <a class="action" href="mailto:ofspacemedia@gmail.com">
-      ofspacemedia@gmail.com
-    </a>
-    <a class="action" href="tel:+40736943321">
-      0736 943 321
-    </a>
-  </div>
+  <script>
+    // subtle animated starfield (premium, minimal)
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
 
-  <footer>
-    © 2025 OUTOFSPACE
-  </footer>
-</main>
+    let W, H, DPR, stars = [];
 
-<script>
-/* subtle animated starfield */
-const canvas=document.getElementById("stars");
-const ctx=canvas.getContext("2d");
-let w,h,stars=[];
+    function resize(){
+      DPR = Math.min(window.devicePixelRatio || 1, 2);
+      W = canvas.width = Math.floor(window.innerWidth * DPR);
+      H = canvas.height = Math.floor(window.innerHeight * DPR);
+      canvas.style.width = window.innerWidth + "px";
+      canvas.style.height = window.innerHeight + "px";
 
-function resize(){
-  w=canvas.width=window.innerWidth;
-  h=canvas.height=window.innerHeight;
-  stars=Array.from({length:(w*h)/16000},()=>({
-    x:Math.random()*w,
-    y:Math.random()*h,
-    v:Math.random()*0.35+0.1
-  }));
-}
-window.addEventListener("resize",resize);
-resize();
+      const count = Math.floor((window.innerWidth * window.innerHeight) / 16000);
+      stars = Array.from({length: count}, () => ({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        v: (Math.random() * 0.28 + 0.08) * DPR,
+        a: Math.random() * 0.55 + 0.18
+      }));
+    }
 
-(function animate(){
-  ctx.clearRect(0,0,w,h);
-  ctx.fillStyle="rgba(255,255,255,.9)";
-  stars.forEach(s=>{
-    s.y+=s.v;
-    if(s.y>h)s.y=0;
-    ctx.fillRect(s.x,s.y,1,1);
-  });
-  requestAnimationFrame(animate);
-})();
-</script>
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      for(const s of stars){
+        s.y += s.v;
+        if(s.y > H + 8){ s.y = -8; s.x = Math.random() * W; }
+        ctx.fillStyle = `rgba(255,255,255,${s.a})`;
+        ctx.fillRect(s.x, s.y, 1.2 * DPR, 1.2 * DPR);
+      }
+      requestAnimationFrame(draw);
+    }
 
+    window.addEventListener("resize", resize);
+    resize();
+    draw();
+  </script>
 </body>
 </html>
