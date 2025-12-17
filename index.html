@@ -57,76 +57,7 @@
       width:min(860px, 100%);
       text-align:center;
     }
-.modal{
-  position:fixed;
-  inset:0;
-  display:none;
-  z-index:10;
-}
-.modal.is-open{ display:block; }
 
-.modal__backdrop{
-  position:absolute;
-  inset:0;
-  background: rgba(0,0,0,.62);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.modal__panel{
-  position:relative;
-  width:min(980px, calc(100% - 28px));
-  margin: 28px auto;
-  border-radius: 24px;
-  border:1px solid rgba(255,255,255,.14);
-  background: rgba(10,12,20,.76);
-  box-shadow: 0 30px 120px rgba(0,0,0,.75);
-  overflow:hidden;
-}
-
-.modal__top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding: 14px 16px;
-  border-bottom:1px solid rgba(255,255,255,.10);
-}
-
-.modal__title{
-  font-weight: 900;
-  letter-spacing: -0.02em;
-}
-
-.modal__close{
-  width:42px;
-  height:42px;
-  border-radius: 14px;
-  border:1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.06);
-  color: rgba(255,255,255,.9);
-  font-weight: 900;
-  cursor:pointer;
-}
-
-.modal__body{
-  padding: 14px 16px 18px;
-}
-
-#invadersCanvas{
-  width:100%;
-  height:auto;
-  aspect-ratio: 900 / 520;
-  border-radius: 18px;
-  border:1px solid rgba(255,255,255,.10);
-  background: rgba(0,0,0,.35);
-  display:block;
-}
-
-.modal__hint{
-  margin-top:10px;
-  font-size:12px;
-  color: rgba(255,255,255,.55);
-}
     /* App button logo — bigger, fills, but keeps green padding visible */
     .app{
   width:170px;
@@ -261,10 +192,6 @@
         <a class="btn" href="mailto:ofspacemedia@gmail.com">ofspacemedia@gmail.com</a>
       </div>
 
-      <div class="emailRow" style="margin-top:12px;">
-  <button class="btn" id="playBtn" type="button">Play OUTOFSPACE Invaders</button>
-</div>
-      
       <div class="meta">© 2025 OUTOFSPACE</div>
     </div>
   </main>
@@ -307,49 +234,6 @@
     resize();
     draw();
 
-    <script>
-  const playBtn = document.getElementById("playBtn");
-  const modal = document.getElementById("gameModal");
-  const closeEls = modal.querySelectorAll("[data-close]");
-  const canvas = document.getElementById("invadersCanvas");
-  const ctx = canvas.getContext("2d");
-
-  function openModal(){
-    modal.classList.add("is-open");
-    modal.setAttribute("aria-hidden", "false");
-    // quick placeholder render
-    renderPlaceholder();
-  }
-
-  function closeModal(){
-    modal.classList.remove("is-open");
-    modal.setAttribute("aria-hidden", "true");
-  }
-
-  playBtn?.addEventListener("click", openModal);
-  closeEls.forEach(el => el.addEventListener("click", closeModal));
-
-  window.addEventListener("keydown", (e) => {
-    if(e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
-  });
-
-  function renderPlaceholder(){
-    // Minimal placeholder (până pui jocul real)
-    const w = canvas.width, h = canvas.height;
-    ctx.clearRect(0,0,w,h);
-    ctx.fillStyle = "rgba(255,255,255,.9)";
-    ctx.font = "900 34px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial";
-    ctx.fillText("OUTOFSPACE Invaders", 40, 80);
-
-    ctx.fillStyle = "rgba(166,255,77,.95)";
-    ctx.font = "800 20px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial";
-    ctx.fillText("Game loading soon…", 40, 120);
-
-    ctx.fillStyle = "rgba(255,255,255,.55)";
-    ctx.font = "600 16px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial";
-    ctx.fillText("When you send the rules + assets, I’ll plug the full game here.", 40, 160);
-  }
-</script>
     // --- Typewriter rotation (changes every ~5s) ---
     const phrases = [
       "warp mode",
@@ -396,21 +280,5 @@
     // start
     tick();
   </script>
-  <div class="modal" id="gameModal" aria-hidden="true">
-  <div class="modal__backdrop" data-close></div>
-
-  <div class="modal__panel" role="dialog" aria-modal="true" aria-label="OUTOFSPACE Invaders">
-    <div class="modal__top">
-      <div class="modal__title">OUTOFSPACE Invaders</div>
-      <button class="modal__close" type="button" data-close aria-label="Close">✕</button>
-    </div>
-
-    <div class="modal__body">
-      <!-- Placeholder: aici intră jocul (canvas / iframe / etc.) -->
-      <canvas id="invadersCanvas" width="900" height="520"></canvas>
-      <div class="modal__hint">Controls: ← → / Space • ESC to close</div>
-    </div>
-  </div>
-</div>
 </body>
 </html>
