@@ -27,6 +27,19 @@
         linear-gradient(180deg,var(--bg),var(--bg2));
       overflow:hidden;
       -webkit-tap-highlight-color: transparent;
+
+      /* Rocket cursor (desktop) */
+      cursor: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'>\
+<defs><filter id='g' x='-50%' y='-50%' width='200%' height='200%'>\
+<feGaussianBlur stdDeviation='1.6' result='b'/>\
+</filter></defs>\
+<path d='M27 6c7 5 10 12 9 22-4 7-12 10-22 9-1-10 2-18 9-22 1-3 2-6 4-9z' fill='%23A6FF4D' opacity='.28' filter='url(%23g)'/>\
+<path d='M27 7c6 5 9 12 8 21-4 6-11 9-20 8-1-9 2-16 8-20 1-3 2-6 4-9z' fill='%23ffffff' opacity='.92'/>\
+<circle cx='28' cy='18' r='3' fill='%23000000' opacity='.55'/>\
+<path d='M16 28l-6 3 3-6 3 3z' fill='%23A6FF4D' opacity='.95'/>\
+<path d='M20 34c-1 3-3 5-6 6 1-3 3-5 6-6z' fill='%23ffffff' opacity='.55'/>\
+</svg>") 12 12, auto;
     }
     canvas{position:fixed; inset:0; width:100%; height:100%; display:block}
 
@@ -43,7 +56,7 @@
       border-radius: 18px;
       padding: 10px 12px;
       box-shadow: 0 30px 100px rgba(0,0,0,.35);
-      min-width: 160px;
+      min-width: 170px;
     }
     .title{
       font-weight: 950;
@@ -120,7 +133,6 @@
     .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.22); }
     .btn.primary{ border-color: rgba(166,255,77,.30); background: rgba(166,255,77,.12); }
     .btn.primary:hover{ background: rgba(166,255,77,.16); }
-
     .hint{
       margin-top: 10px;
       font-size: 11px;
@@ -138,7 +150,7 @@
       <div class="statRow">
         <span>Score: <b id="uiScore">0</b></span>
         <span>❤: <b id="uiLives">3</b></span>
-        <span>Streak: <b id="uiStreak">0</b></span>
+        <span>Combo: <b id="uiCombo">x1</b></span>
       </div>
     </div>
     <div class="card" style="text-align:right">
@@ -146,6 +158,7 @@
       <div class="statRow" style="justify-content:flex-end">
         <span>👨‍🚀: <b id="uiAstro">0</b></span>
         <span>$: <b id="uiCash">0</b></span>
+        <span>🛡: <b id="uiShield">0s</b></span>
       </div>
     </div>
   </div>
@@ -154,17 +167,18 @@
     <div class="panel">
       <h1>Tap Dash</h1>
       <p>
-        Dodge <span class="green">briefs</span> & <span class="green">UFOs</span>. Collect <span class="green">astronauts</span> & <span class="green">dollars</span>.
+        Dodge <span class="green">briefs</span>, <span class="green">UFOs</span> & <span class="green">missiles</span>.
+        Collect <span class="green">astronauts</span>, <span class="green">dollars</span> & power-ups.
       </p>
       <p>
-        <span class="green">How:</span> Tap/click <span class="green">left</span> to dash left lane, tap/click <span class="green">right</span> to dash right lane.
-        On mobile, tap anywhere — left half / right half.
+        <span class="green">How:</span> Tap/click <span class="green">left</span> to go left lane,
+        tap/click <span class="green">right</span> to go right lane. Desktop: you can also use <span class="green">← →</span>.
       </p>
       <div class="actions">
         <button class="btn primary" id="btnStart" type="button">Start</button>
         <button class="btn" id="btnPractice" type="button">Practice</button>
       </div>
-      <div class="hint">Tip: Keep streak alive for premium score. Press R to restart, P to pause.</div>
+      <div class="hint">R = restart • P = pause • Keep combo for premium score.</div>
     </div>
   </div>
 
