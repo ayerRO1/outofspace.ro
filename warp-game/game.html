@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>OUTOFSPACE — WARP GATE</title>
+  <title>OUTOFSPACE — Tap Dash</title>
   <meta name="theme-color" content="#0B0F1A" />
   <style>
     :root{
@@ -29,37 +29,28 @@
       -webkit-tap-highlight-color: transparent;
     }
     canvas{position:fixed; inset:0; width:100%; height:100%; display:block}
+
     .hud{
-      position:fixed;
-      left: 16px;
-      right: 16px;
-      top: 14px;
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:12px;
-      z-index:3;
+      position:fixed; left:16px; right:16px; top: max(14px, env(safe-area-inset-top));
+      display:flex; justify-content:space-between; gap:12px; z-index:5;
       pointer-events:none;
     }
     .card{
-      pointer-events:none;
       border:1px solid var(--stroke);
       background: rgba(255,255,255,.04);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border-radius: 18px;
       padding: 10px 12px;
-      min-width: 150px;
       box-shadow: 0 30px 100px rgba(0,0,0,.35);
+      min-width: 160px;
     }
     .title{
-      font-weight: 900;
+      font-weight: 950;
       letter-spacing:-0.03em;
       font-size: 13px;
       color: rgba(255,255,255,.88);
-      display:flex;
-      gap:10px;
-      align-items:center;
+      display:flex; align-items:center; gap:10px;
     }
     .badge{
       display:inline-flex;
@@ -67,40 +58,27 @@
       border-radius: 999px;
       border:1px solid rgba(166,255,77,.28);
       background: rgba(166,255,77,.08);
-      color: rgba(255,255,255,.88);
-      font-weight: 900;
+      color: rgba(255,255,255,.90);
+      font-weight: 950;
       font-size: 11px;
       letter-spacing:-0.01em;
     }
     .statRow{
       margin-top:8px;
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
+      display:flex; gap:14px; flex-wrap:wrap;
       color: rgba(255,255,255,.78);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 850;
       letter-spacing:-0.01em;
     }
-    .statRow b{color: var(--accent)}
-    .tip{
-      margin-top:6px;
-      color: rgba(255,255,255,.58);
-      font-size: 11px;
-      font-weight:700;
-    }
+    .statRow b{ color: var(--accent); }
 
     .centerOverlay{
-      position:fixed;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      z-index:4;
-      padding: 18px;
+      position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+      z-index:10; padding:18px;
     }
     .panel{
-      width:min(760px, 100%);
+      width:min(760px,100%);
       border:1px solid rgba(255,255,255,.14);
       background: rgba(10,12,20,.78);
       border-radius: 24px;
@@ -114,7 +92,7 @@
       font-size: clamp(28px, 4vw, 44px);
       line-height: 1.0;
       letter-spacing:-0.05em;
-      font-weight: 950;
+      font-weight: 980;
     }
     .panel p{
       margin:0 0 14px;
@@ -124,12 +102,8 @@
       letter-spacing:-0.01em;
       font-size: 14px;
     }
-    .actions{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top: 12px;
-    }
+    .green{ color: var(--accent); font-weight: 900; }
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
     .btn{
       pointer-events:auto;
       cursor:pointer;
@@ -138,56 +112,20 @@
       background: rgba(255,255,255,.06);
       color: rgba(255,255,255,.92);
       padding: 12px 14px;
-      font-weight: 900;
+      font-weight: 950;
       letter-spacing:-0.01em;
       min-width: 160px;
       transition: transform .15s ease, background .15s ease, border-color .15s ease;
     }
-    .btn:hover{
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.09);
-      border-color: rgba(255,255,255,.22);
-    }
-    .btn.primary{
-      border-color: rgba(166,255,77,.30);
-      background: rgba(166,255,77,.12);
-    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.22); }
+    .btn.primary{ border-color: rgba(166,255,77,.30); background: rgba(166,255,77,.12); }
     .btn.primary:hover{ background: rgba(166,255,77,.16); }
-    .small{
-      color: rgba(255,255,255,.55);
-      font-size: 11px;
-      font-weight: 700;
+
+    .hint{
       margin-top: 10px;
-    }
-    .green{ color: var(--accent); font-weight: 900; }
-
-    .toast{
-      position: fixed;
-      left: 50%;
-      bottom: 18px;
-      transform: translateX(-50%) translateY(14px);
-      opacity:0;
-      pointer-events:none;
-      z-index:10;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.45);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      color: rgba(255,255,255,.92);
-      font-size: 13px;
-      font-weight: 800;
-      transition: opacity .18s ease, transform .18s ease;
-      max-width: min(560px, calc(100% - 28px));
-      text-align:center;
-    }
-    .toast.show{opacity:1; transform: translateX(-50%) translateY(0)}
-
-    /* Mobile safe-area */
-    @supports(padding: max(0px)){
-      .hud{ top: max(14px, env(safe-area-inset-top)); }
-      .toast{ bottom: max(18px, env(safe-area-inset-bottom)); }
+      font-size: 11px;
+      color: rgba(255,255,255,.55);
+      font-weight: 700;
     }
   </style>
 </head>
@@ -196,47 +134,39 @@
 
   <div class="hud">
     <div class="card">
-      <div class="title">OUTOFSPACE <span class="badge">WARP GATE</span></div>
+      <div class="title">OUTOFSPACE <span class="badge">TAP DASH</span></div>
       <div class="statRow">
         <span>Score: <b id="uiScore">0</b></span>
+        <span>❤: <b id="uiLives">3</b></span>
         <span>Streak: <b id="uiStreak">0</b></span>
-        <span>Fuel: <b id="uiFuel">100%</b></span>
       </div>
-      <div class="tip">Hold / click / touch to <span class="green">charge</span>. Release to <span class="green">warp</span>.</div>
     </div>
-
     <div class="card" style="text-align:right">
-      <div class="title">Pipeline</div>
+      <div class="title">Collect</div>
       <div class="statRow" style="justify-content:flex-end">
-        <span><b id="uiStage">Brief</b></span>
-        <span>Gates: <b id="uiGates">0</b></span>
+        <span>👨‍🚀: <b id="uiAstro">0</b></span>
+        <span>$: <b id="uiCash">0</b></span>
       </div>
-      <div class="tip">Perfect gate = <span class="green">premium</span> points.</div>
     </div>
   </div>
 
   <div class="centerOverlay" id="overlay">
     <div class="panel">
-      <h1>WARP GATE</h1>
+      <h1>Tap Dash</h1>
       <p>
-        Turn noise into signal. Pilot your craft through campaign gates — collect <span class="green">clients</span>,
-        dodge <span class="green">ad clutter</span>, and keep the streak alive.
+        Dodge <span class="green">briefs</span> & <span class="green">UFOs</span>. Collect <span class="green">astronauts</span> & <span class="green">dollars</span>.
       </p>
       <p>
-        <span class="green">How to play:</span> Hold to charge. Release to dash. Land inside the green ring for a perfect pass.
-        On mobile: press and hold anywhere.
+        <span class="green">How:</span> Tap/click <span class="green">left</span> to dash left lane, tap/click <span class="green">right</span> to dash right lane.
+        On mobile, tap anywhere — left half / right half.
       </p>
       <div class="actions">
         <button class="btn primary" id="btnStart" type="button">Start</button>
         <button class="btn" id="btnPractice" type="button">Practice</button>
       </div>
-      <div class="small">
-        Tip: short charges = micro jumps. full charge = long warp. Press <span class="green">R</span> to restart, <span class="green">P</span> to pause.
-      </div>
+      <div class="hint">Tip: Keep streak alive for premium score. Press R to restart, P to pause.</div>
     </div>
   </div>
-
-  <div class="toast" id="toast">✅</div>
 
   <script src="./game.js"></script>
 </body>
