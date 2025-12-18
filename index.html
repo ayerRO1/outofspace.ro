@@ -17,7 +17,6 @@
       --stroke:rgba(255,255,255,.12);
       --glass:rgba(255,255,255,.04);
       --accent:#A6FF4D;
-      --radius:28px;
     }
 
     *{ box-sizing:border-box; }
@@ -58,7 +57,6 @@
       text-align:center;
     }
 
-    /* App button logo — bigger, fills */
     .app{
       width:170px;
       height:170px;
@@ -71,7 +69,6 @@
       border:none;
       box-shadow:none;
     }
-
     .app img{
       width:100%;
       height:100%;
@@ -87,7 +84,6 @@
       letter-spacing: .01em;
     }
 
-    /* Headline — bold / premium */
     h1{
       margin: 0 0 22px;
       font-size: clamp(44px, 6vw, 78px);
@@ -101,7 +97,6 @@
       white-space:nowrap;
     }
 
-    /* Typewriter green word */
     .dynamic{
       color: var(--accent);
       display:inline-block;
@@ -116,9 +111,7 @@
       transform: translateY(2px);
       animation: blink 0.85s step-end infinite;
     }
-    @keyframes blink{
-      50%{ border-color: transparent; }
-    }
+    @keyframes blink{ 50%{ border-color: transparent; } }
 
     .dots{
       color: var(--accent);
@@ -160,7 +153,7 @@
       letter-spacing:.02em;
     }
 
-    /* --- OUTOFSPACE Run launcher (in-hero, no scroll) --- */
+    /* --- OUTOFSPACE Run launcher --- */
     .gameLaunch{
       margin-top: 26px;
       display:flex;
@@ -182,8 +175,6 @@
       transform: translateZ(0);
       animation: bob 2.6s ease-in-out infinite;
     }
-
-    /* subtle up-down */
     @keyframes bob{
       0%,100%{ transform: translateY(0); }
       50%{ transform: translateY(-4px); }
@@ -199,14 +190,11 @@
       pointer-events:none;
       animation: glowbreath 2.4s ease-in-out infinite;
     }
-
-    /* glow breathing */
     @keyframes glowbreath{
       0%,100%{ opacity:.72; transform: scale(0.98); }
       50%{ opacity:1; transform: scale(1.04); }
     }
 
-    /* circular 8-bit text */
     .ring{
       position:absolute;
       inset:0;
@@ -214,14 +202,12 @@
       place-items:center;
       pointer-events:none;
     }
-
     .ring svg{
       width: 132px;
       height: 132px;
       overflow: visible;
       filter: drop-shadow(0 0 10px rgba(166,255,77,.25));
     }
-
     .ring text{
       fill: rgba(166,255,77,.90);
       letter-spacing: 2px;
@@ -231,8 +217,6 @@
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
       animation: flicker 2.2s steps(2,end) infinite;
     }
-
-    /* 8-bit flicker (subtle) */
     @keyframes flicker{
       0%, 100% { opacity: .92; }
       45% { opacity: .78; }
@@ -250,33 +234,32 @@
       place-items:center;
     }
 
+    /* this is the app-like square behind the rocket */
     .rocketIcon{
-      width: 58px;
-      height: 58px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.05);
+      width: 86px;
+      height: 86px;
+      border-radius: 24px;
+      background: rgba(166,255,77,.08);
       border: 1px solid rgba(255,255,255,.10);
       box-shadow:
-        0 20px 60px rgba(0,0,0,.35),
-        0 0 0 1px rgba(166,255,77,.08) inset;
+        0 18px 60px rgba(0,0,0,.35),
+        0 0 0 1px rgba(166,255,77,.10) inset;
       display:grid;
       place-items:center;
-      transform: translateZ(0);
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
       position:relative;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
     }
 
     .rocketIcon::after{
       content:"";
       position:absolute;
-      inset:-14px;
-      background: radial-gradient(circle at 50% 60%, rgba(166,255,77,.22), rgba(166,255,77,0) 60%);
-      filter: blur(6px);
+      inset:-18px;
+      background: radial-gradient(circle at 50% 60%, rgba(166,255,77,.22), rgba(166,255,77,0) 62%);
+      filter: blur(8px);
       pointer-events:none;
       opacity:.9;
       animation: iconbreath 2.2s ease-in-out infinite;
     }
-
     @keyframes iconbreath{
       0%,100%{ opacity:.65; transform: scale(0.98); }
       50%{ opacity:1; transform: scale(1.03); }
@@ -284,14 +267,14 @@
 
     .gameButton:hover .rocketIcon{
       transform: translateY(-1px) rotate(-2deg) scale(1.03);
-      background: rgba(255,255,255,.07);
+      background: rgba(166,255,77,.10);
       border-color: rgba(255,255,255,.16);
     }
 
     .rocketSvg{
-      width: 30px;
-      height: 30px;
-      filter: drop-shadow(0 0 10px rgba(166,255,77,.20));
+      width: 48px;
+      height: 48px;
+      display:block;
     }
 
     .gameHint{
@@ -302,12 +285,8 @@
       font-weight: 650;
     }
 
-    /* Reduce motion */
     @media (prefers-reduced-motion: reduce){
-      .gameButton{ animation:none; }
-      .gameButton::before{ animation:none; }
-      .ring text{ animation:none; }
-      .rocketIcon::after{ animation:none; }
+      .gameButton, .gameButton::before, .ring text, .rocketIcon::after{ animation:none; }
     }
 
     /* --- Modal --- */
@@ -323,7 +302,6 @@
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     }
-
     .modal[aria-hidden="false"]{ display:flex; }
 
     .modalCard{
@@ -389,7 +367,6 @@
 
     .modalBody{
       height: calc(100% - 54px);
-      position:relative;
       background: rgba(0,0,0,.25);
     }
 
@@ -401,7 +378,6 @@
       background: transparent;
     }
 
-    /* Mobile */
     @media (max-width: 520px){
       .app{ width:150px; height:150px; padding:10px; }
       .btn{ min-width: 100%; }
@@ -420,7 +396,6 @@
   <main>
     <div class="wrap">
       <div class="app" aria-label="OUTOFSPACE">
-        <!-- put outofspace-logo.png next to index.html -->
         <img src="outofspace-logo.png" alt="OUTOFSPACE logo">
       </div>
 
@@ -438,7 +413,6 @@
         <a class="btn" href="mailto:ofspacemedia@gmail.com">ofspacemedia@gmail.com</a>
       </div>
 
-      <!-- OUTOFSPACE Run launcher (in hero, lower, no scroll) -->
       <div class="gameLaunch" aria-label="Play OUTOFSPACE Run">
         <button class="gameButton" id="openGame" type="button" aria-haspopup="dialog" aria-controls="gameModal">
           <span class="ring" aria-hidden="true">
@@ -456,45 +430,53 @@
 
           <span class="rocket">
             <span class="rocketIcon">
-  <svg class="rocketSvg" viewBox="0 0 64 64" aria-hidden="true">
-    <!-- glow (subtle, game-like) -->
-    <defs>
-      <filter id="rg" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur stdDeviation="2.2" result="b"/>
-        <feMerge>
-          <feMergeNode in="b"/>
-          <feMergeNode in="SourceGraphic"/>
-        </feMerge>
-      </filter>
-    </defs>
+              <!-- Rocket icon EXACT game-like: white body, gray window, green fins + flame glow -->
+              <svg class="rocketSvg" viewBox="0 0 64 64" aria-hidden="true">
+                <defs>
+                  <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
+                    <feGaussianBlur stdDeviation="2.2" result="b"/>
+                    <feMerge>
+                      <feMergeNode in="b"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
 
-    <!-- body -->
-    <path filter="url(#rg)"
-      d="M32 8C42 16 46 26 44 42C38 52 26 56 14 54C12 42 16 30 26 22C28 16 30 12 32 8Z"
-      fill="rgba(255,255,255,.95)"/>
+                <!-- green flame/glow behind -->
+                <path filter="url(#softGlow)"
+                      d="M32 49c-9 7-8 13 0 13s9-6 0-13Z"
+                      fill="rgba(166,255,77,.55)"/>
 
-    <!-- window -->
-    <circle cx="33" cy="28" r="7" fill="rgba(0,0,0,.46)"/>
+                <!-- body (simple teardrop) -->
+                <path d="M32 8
+                         C41 18 44 26 44 36
+                         C44 46 38 52 32 55
+                         C26 52 20 46 20 36
+                         C20 26 23 18 32 8Z"
+                      fill="rgba(255,255,255,.95)"/>
 
-    <!-- fins (green, game style) -->
-    <path d="M18 40l-7 4 4-7 3 3Z" fill="rgba(166,255,77,.98)"/>
-    <path d="M44 40l7 4-4-7-3 3Z" fill="rgba(166,255,77,.98)"/>
+                <!-- window -->
+                <circle cx="32" cy="30" r="7" fill="rgba(0,0,0,.46)"/>
 
-    <!-- flame -->
-    <path d="M26 52c4 2 8 2 12 0-1 4-3 6-6 6s-5-2-6-6Z"
-      fill="rgba(166,255,77,.62)"/>
-  </svg>
-</span>
+                <!-- fins (green rectangles / emoji-ish) -->
+                <path d="M18 36h8v10h-8z" fill="rgba(166,255,77,.95)"/>
+                <path d="M38 36h8v10h-8z" fill="rgba(166,255,77,.95)"/>
+
+                <!-- little flame tip -->
+                <path d="M32 54c-3 2-3 4 0 4s3-2 0-4Z"
+                      fill="rgba(166,255,77,.80)"/>
+              </svg>
+            </span>
           </span>
         </button>
       </div>
+
       <div class="gameHint">Play a quick run while we’re in warp.</div>
 
       <div class="meta">© 2025 OUTOFSPACE</div>
     </div>
   </main>
 
-  <!-- Modal -->
   <div class="modal" id="gameModal" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="modalCard" role="document">
       <div class="modalTop">
@@ -510,10 +492,9 @@
   </div>
 
   <script>
-    // --- Subtle animated starfield (premium, minimal) ---
+    // --- Subtle animated starfield ---
     const canvas = document.getElementById("stars");
     const ctx = canvas.getContext("2d");
-
     let W, H, DPR, stars = [];
 
     function resize(){
@@ -544,31 +525,16 @@
     }
 
     window.addEventListener("resize", resize);
-    resize();
-    draw();
+    resize(); draw();
 
-    // --- Typewriter rotation (changes every ~5s) ---
-    const phrases = [
-      "warp mode",
-      "reconstruction",
-      "sonic phase",
-      "re-build mode",
-      "light speed"
-    ];
-
+    // --- Typewriter rotation ---
+    const phrases = ["warp mode","reconstruction","sonic phase","re-build mode","light speed"];
     const el = document.getElementById("dynamicText");
-
-    const TYPE_MS = 65;
-    const ERASE_MS = 35;
-    const HOLD_MS = 5000;
-
-    let idx = 0;
-    let pos = 0;
-    let isErasing = false;
+    const TYPE_MS = 65, ERASE_MS = 35, HOLD_MS = 5000;
+    let idx = 0, pos = 0, isErasing = false;
 
     function tick(){
       const word = phrases[idx];
-
       if(!isErasing){
         pos++;
         el.textContent = word.slice(0, pos);
@@ -596,7 +562,6 @@
     const modal = document.getElementById("gameModal");
     const closeBtn = document.getElementById("closeGame");
     const frame = document.getElementById("gameFrame");
-
     const GAME_URL = "warp-game/game.html";
 
     function openModal(){
@@ -604,7 +569,6 @@
       frame.src = GAME_URL;
       document.body.style.overflow = "hidden";
     }
-
     function closeModal(){
       modal.setAttribute("aria-hidden", "true");
       frame.src = "";
@@ -614,14 +578,9 @@
     openBtn.addEventListener("click", openModal);
     closeBtn.addEventListener("click", closeModal);
 
-    modal.addEventListener("click", (e) => {
-      if(e.target === modal) closeModal();
-    });
-
+    modal.addEventListener("click", (e) => { if(e.target === modal) closeModal(); });
     window.addEventListener("keydown", (e) => {
-      if(e.key === "Escape" && modal.getAttribute("aria-hidden") === "false"){
-        closeModal();
-      }
+      if(e.key === "Escape" && modal.getAttribute("aria-hidden") === "false") closeModal();
     });
   </script>
 </body>
