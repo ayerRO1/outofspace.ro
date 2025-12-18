@@ -325,7 +325,7 @@
 
     if(state.lives <= 0){
       overlay.style.display = "flex";
-      overlay.querySelector("h1").textContent = "Run complete";
+      overlay.querySelector("h1").textContent = "OUTOFSPACE Run complete";
       overlay.querySelectorAll("p")[0].innerHTML =
         `Score <span class="green">${Math.floor(state.score)}</span> • 👨‍🚀 <span class="green">${state.astro}</span> • $ <span class="green">${state.cash}</span>`;
       overlay.querySelectorAll("p")[1].innerHTML =
