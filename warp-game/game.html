@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>OUTOFSPACE — Tap Dash</title>
+  <title>OUTOFSPACE — Run</title>
   <meta name="theme-color" content="#0B0F1A" />
 
   <style>
@@ -142,12 +142,13 @@
     }
   </style>
 </head>
+
 <body>
   <canvas id="c"></canvas>
 
   <div class="hud">
     <div class="card">
-      <div class="title">OUTOFSPACE <span class="badge">TAP DASH</span></div>
+      <div class="title">OUTOFSPACE <span class="badge">RUN</span></div>
       <div class="statRow">
         <span>Score: <b id="uiScore">0</b></span>
         <span>❤: <b id="uiLives">3</b></span>
@@ -167,8 +168,9 @@
 
   <div class="centerOverlay" id="overlay">
     <div class="panel">
-      <h1>Tap Dash</h1>
+      <h1>OUTOFSPACE Run</h1>
       <p>
+        Welcome to <span class="green">OUTOFSPACE Run</span>.
         Dodge <span class="green">deadlines</span>, <span class="green">UFOs</span> & <span class="green">missiles</span>.
         Collect <span class="green">astronauts</span>, <span class="green">dollars</span> & power-ups.
       </p>
@@ -176,10 +178,12 @@
         <span class="green">How:</span> Tap/click <span class="green">left</span> for left lane,
         tap/click <span class="green">right</span> for right lane. Desktop: <span class="green">← →</span>.
       </p>
+
       <div class="actions">
         <button class="btn primary" id="btnStart" type="button">Start</button>
         <button class="btn" id="btnPractice" type="button">Practice</button>
       </div>
+
       <div class="hint">R = restart • P = pause • Keep combo alive for premium score.</div>
     </div>
   </div>
