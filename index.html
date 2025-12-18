@@ -180,6 +180,13 @@
       outline:none;
       -webkit-tap-highlight-color: transparent;
       transform: translateZ(0);
+      animation: bob 2.6s ease-in-out infinite;
+    }
+
+    /* subtle up-down */
+    @keyframes bob{
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-4px); }
     }
 
     .gameButton::before{
@@ -190,6 +197,13 @@
       filter: blur(2px);
       opacity: .95;
       pointer-events:none;
+      animation: glowbreath 2.4s ease-in-out infinite;
+    }
+
+    /* glow breathing */
+    @keyframes glowbreath{
+      0%,100%{ opacity:.72; transform: scale(0.98); }
+      50%{ opacity:1; transform: scale(1.04); }
     }
 
     /* circular 8-bit text */
@@ -214,11 +228,21 @@
       font-weight: 800;
       font-size: 9px;
       text-transform: uppercase;
-      /* pixel-ish fallback */
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      animation: flicker 2.2s steps(2,end) infinite;
     }
 
-    /* rocket icon */
+    /* 8-bit flicker (subtle) */
+    @keyframes flicker{
+      0%, 100% { opacity: .92; }
+      45% { opacity: .78; }
+      46% { opacity: .95; }
+      47% { opacity: .70; }
+      48% { opacity: .92; }
+      78% { opacity: .84; }
+      79% { opacity: .98; }
+    }
+
     .rocket{
       position:absolute;
       inset:0;
@@ -249,10 +273,17 @@
       background: radial-gradient(circle at 50% 60%, rgba(166,255,77,.22), rgba(166,255,77,0) 60%);
       filter: blur(6px);
       pointer-events:none;
+      opacity:.9;
+      animation: iconbreath 2.2s ease-in-out infinite;
+    }
+
+    @keyframes iconbreath{
+      0%,100%{ opacity:.65; transform: scale(0.98); }
+      50%{ opacity:1; transform: scale(1.03); }
     }
 
     .gameButton:hover .rocketIcon{
-      transform: translateY(-1px) scale(1.02);
+      transform: translateY(-1px) rotate(-2deg) scale(1.03);
       background: rgba(255,255,255,.07);
       border-color: rgba(255,255,255,.16);
     }
@@ -269,6 +300,14 @@
       color: rgba(255,255,255,.55);
       letter-spacing: .02em;
       font-weight: 650;
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      .gameButton{ animation:none; }
+      .gameButton::before{ animation:none; }
+      .ring text{ animation:none; }
+      .rocketIcon::after{ animation:none; }
     }
 
     /* --- Modal --- */
@@ -368,7 +407,7 @@
       .btn{ min-width: 100%; }
       .tagline{ font-size:15px; }
       .line{ white-space:normal; }
-      .gameButton{ width: 120px; height: 120px; }
+      .gameButton{ width: 120px; height: 120px; animation: bob 3.0s ease-in-out infinite; }
       .ring svg{ width:120px; height:120px; }
       .modalCard{ height: 82vh; }
     }
@@ -417,7 +456,6 @@
 
           <span class="rocket">
             <span class="rocketIcon">
-              <!-- minimal rocket svg (accent glow) -->
               <svg class="rocketSvg" viewBox="0 0 64 64" fill="none" aria-hidden="true">
                 <path d="M38 6c9 7 14 17 12 32-6 10-18 15-33 13-2-15 3-27 13-33 1-4 3-9 8-12Z" fill="rgba(255,255,255,.92)"/>
                 <circle cx="39" cy="26" r="6" fill="rgba(0,0,0,.50)"/>
@@ -498,9 +536,9 @@
 
     const el = document.getElementById("dynamicText");
 
-    const TYPE_MS = 65;       // typing speed
-    const ERASE_MS = 35;      // erase speed
-    const HOLD_MS = 5000;     // keep the word visible before change
+    const TYPE_MS = 65;
+    const ERASE_MS = 35;
+    const HOLD_MS = 5000;
 
     let idx = 0;
     let pos = 0;
@@ -541,21 +579,20 @@
 
     function openModal(){
       modal.setAttribute("aria-hidden", "false");
-      frame.src = GAME_URL; // load only when opened
+      frame.src = GAME_URL;
       document.body.style.overflow = "hidden";
     }
 
     function closeModal(){
       modal.setAttribute("aria-hidden", "true");
-      frame.src = ""; // unload to stop audio/cpu
-      document.body.style.overflow = "hidden"; // keep no-scroll on index
+      frame.src = "";
+      document.body.style.overflow = "hidden";
     }
 
     openBtn.addEventListener("click", openModal);
     closeBtn.addEventListener("click", closeModal);
 
     modal.addEventListener("click", (e) => {
-      // close when clicking outside the card
       if(e.target === modal) closeModal();
     });
 
